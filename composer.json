@@ -1,7 +1,7 @@
 {
-    "name": "filp/whoops",
+    "name": "asika/whoops",
     "license": "MIT",
-    "description": "php error handling for cool kids",
+    "description": "Whoops 2 supports PHP 5.3 to 7",
     "keywords": ["library", "error", "handling", "exception", "whoops", "zf2"],
     "homepage": "https://github.com/filp/whoops",
     "authors": [
