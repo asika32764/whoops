@@ -226,7 +226,7 @@ class RunTest extends TestCase
         // are given the handler, and in the inverse order they were
         // registered.
         $run->handleException($exception);
-        $this->assertEquals((array) $order, array(3, 2, 1));
+        $this->assertEquals((array) $order, [3, 2, 1]);
     }
 
     /**
@@ -436,6 +436,15 @@ class RunTest extends TestCase
         $run = $this->getRunInstance();
         $run->sendHttpCode(true);
         $this->assertEquals(500, $run->sendHttpCode());
+    }
+
+    /**
+     * @covers Whoops\Run::sendHttpCode
+     */
+    public function testSendHttpCodeNullCode()
+    {
+        $run = $this->getRunInstance();
+        $this->assertEquals(false, $run->sendHttpCode(null));
     }
 
     /**

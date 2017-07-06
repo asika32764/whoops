@@ -11,7 +11,7 @@ use Whoops\TestCase;
 class TemplateHelperTest extends TestCase
 {
     /**
-     * @var Whoops\Util\TemplateHelper
+     * @var TemplateHelper
      */
     private $helper;
 
@@ -64,6 +64,30 @@ class TemplateHelperTest extends TestCase
     }
 
     /**
+     * @covers Whoops\Util\TemplateHelper::breakOnDelimiter
+     */
+    public function testBreakOnDelimiter()
+    {
+        $this->assertSame(
+            '<div class="delimiter">abc</div>-<div class="delimiter">123</div>-<div class="delimiter">456</div>',
+            $this->helper->breakOnDelimiter('-', 'abc-123-456')
+        );
+    }
+
+    /**
+     * @covers Whoops\Util\TemplateHelper::shorten
+     */
+    public function testShorten()
+    {
+        $path = '/foo/bar/baz/abc.def';
+
+        $this->assertSame($path, $this->helper->shorten($path));
+
+        $this->helper->setApplicationRootPath('/foo/bar');
+        $this->assertSame('&hellip;/baz/abc.def', $this->helper->shorten($path));
+    }
+
+    /**
      * @covers Whoops\Util\TemplateHelper::slug
      */
     public function testSlug()
@@ -80,7 +104,7 @@ class TemplateHelperTest extends TestCase
         $template = __DIR__ . "/../../fixtures/template.php";
 
         ob_start();
-        $this->helper->render($template, array("name" => "B<o>b"));
+        $this->helper->render($template, ["name" => "B<o>b"]);
         $output = ob_get_clean();
 
         $this->assertEquals(
@@ -98,19 +122,19 @@ class TemplateHelperTest extends TestCase
      */
     public function testTemplateVariables()
     {
-        $this->helper->setVariables(array(
+        $this->helper->setVariables([
             "name" => "Whoops",
             "type" => "library",
             "desc" => "php errors for cool kids",
-        ));
+        ]);
 
         $this->helper->setVariable("name", "Whoops!");
         $this->assertEquals($this->helper->getVariable("name"), "Whoops!");
         $this->helper->delVariable("type");
 
-        $this->assertEquals($this->helper->getVariables(), array(
+        $this->assertEquals($this->helper->getVariables(), [
             "name" => "Whoops!",
             "desc" => "php errors for cool kids",
-        ));
+        ]);
     }
 }

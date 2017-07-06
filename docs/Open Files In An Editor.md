@@ -1,7 +1,7 @@
 # Open Files In An Editor
 
 When using the pretty error page feature, whoops comes with the ability to
-open referenced files directly in your IDE or editor. 
+open referenced files directly in your IDE or editor.
 This feature only works in case your php-source files are locally accessible to the machine on which the editor is installed.
 
 ```php
@@ -15,12 +15,14 @@ $handler->setEditor('sublime');
 
 The following editors are currently supported by default.
 
-- `sublime`  - Sublime Text 2 and possibly 3 (on OS X you might need [a special handler](https://github.com/dhoulb/subl))
 - `emacs`    - Emacs
-- `textmate` - Textmate
+- `idea`     - IDEA
 - `macvim`   - MacVim
-- `xdebug`   - xdebug (uses [xdebug.file_link_format](http://xdebug.org/docs/all_settings#file_link_format))
 - `phpstorm` - PhpStorm
+- `sublime`  - Sublime Text 2 and possibly 3 (on OS X you might need [a special handler](https://github.com/dhoulb/subl))
+- `textmate` - Textmate
+- `xdebug`   - xdebug (uses [xdebug.file_link_format](http://xdebug.org/docs/all_settings#file_link_format))
+- `vscode`   - VSCode (ref [Opening VS Code with URLs](https://code.visualstudio.com/docs/editor/command-line#_opening-vs-code-with-urls))
 
 Adding your own editor is simple:
 
