@@ -1,6 +1,8 @@
 # whoops
 PHP errors for cool kids
 
+> This is a fork to support PHP 5.3, please install with `composer require asika/whoops`
+
 [![Total Downloads](https://img.shields.io/packagist/dm/filp/whoops.svg)](https://packagist.org/packages/filp/whoops)
 [![Latest Version](http://img.shields.io/packagist/v/filp/whoops.svg)](https://packagist.org/packages/filp/whoops)
 [![Reference Status](https://www.versioneye.com/php/filp:whoops/reference_badge.svg?style=flat)](https://www.versioneye.com/php/filp:whoops/references)
