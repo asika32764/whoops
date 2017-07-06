@@ -54,7 +54,8 @@ class Inspector
      */
     public function getExceptionMessage()
     {
-        return $this->extractDocrefUrl($this->exception->getMessage())['message'];
+        $r = $this->extractDocrefUrl($this->exception->getMessage());
+        return $r['message'];
     }
 
     /**
@@ -64,14 +65,16 @@ class Inspector
      */
     public function getExceptionDocrefUrl()
     {
-        return $this->extractDocrefUrl($this->exception->getMessage())['url'];
+        $r = $this->extractDocrefUrl($this->exception->getMessage());
+
+        return $r['url'];
     }
 
     private function extractDocrefUrl($message) {
-        $docref = [
+        $docref = array(
             'message' => $message,
             'url' => null,
-        ];
+        );
 
         // php embbeds urls to the manual into the Exception message with the following ini-settings defined
         // http://php.net/manual/en/errorfunc.configuration.php#ini.docref-root
@@ -134,7 +137,7 @@ class Inspector
                     $file = '[internal]';
                     $line = 0;
 
-                    $next_frame = !empty($frames[$k + 1]) ? $frames[$k + 1] : [];
+                    $next_frame = !empty($frames[$k + 1]) ? $frames[$k + 1] : array();
 
                     if ($this->isValidNextFrame($next_frame)) {
                         $file = $next_frame['file'];
@@ -206,7 +209,7 @@ class Inspector
         }
 
         if (!extension_loaded('xdebug') || !xdebug_is_enabled()) {
-            return [];
+            return array();
         }
 
         // Use xdebug to get the full stack trace and remove the shutdown handler stack trace
@@ -225,14 +228,14 @@ class Inspector
      */
     protected function getFrameFromException($exception)
     {
-        return [
+        return array(
             'file'  => $exception->getFile(),
             'line'  => $exception->getLine(),
             'class' => get_class($exception),
-            'args'  => [
+            'args'  => array(
                 $exception->getMessage(),
-            ],
-        ];
+            ),
+        );
     }
 
     /**
@@ -243,12 +246,12 @@ class Inspector
      */
     protected function getFrameFromError(ErrorException $exception)
     {
-        return [
+        return array(
             'file'  => $exception->getFile(),
             'line'  => $exception->getLine(),
             'class' => null,
-            'args'  => [],
-        ];
+            'args'  => array(),
+        );
     }
 
     /**

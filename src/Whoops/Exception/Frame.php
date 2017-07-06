@@ -24,7 +24,7 @@ class Frame implements Serializable
     /**
      * @var array[]
      */
-    protected $comments = [];
+    protected $comments = array();
 
     /**
      * @var bool
@@ -101,7 +101,7 @@ class Frame implements Serializable
      */
     public function getArgs()
     {
-        return isset($this->frame['args']) ? (array) $this->frame['args'] : [];
+        return isset($this->frame['args']) ? (array) $this->frame['args'] : array();
     }
 
     /**
@@ -143,10 +143,10 @@ class Frame implements Serializable
      */
     public function addComment($comment, $context = 'global')
     {
-        $this->comments[] = [
+        $this->comments[] = array(
             'comment' => $comment,
             'context' => $context,
-        ];
+        );
     }
 
     /**
@@ -286,7 +286,7 @@ class Frame implements Serializable
 
     /**
      * Mark as an frame belonging to the application.
-     * 
+     *
      * @param boolean $application
      */
     public function setApplication($application)

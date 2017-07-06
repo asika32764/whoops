@@ -24,8 +24,12 @@ class SystemFacade
      *
      * @return callable|null
      */
-    public function setErrorHandler(callable $handler, $types = 'use-php-defaults')
+    public function setErrorHandler($handler, $types = 'use-php-defaults')
     {
+        if (!is_callable($handler)) {
+            throw new \InvalidArgumentException('$handler must be a callable.');
+        }
+
         // Workaround for PHP 5.5
         if ($types === 'use-php-defaults') {
             $types = E_ALL | E_STRICT;
@@ -38,8 +42,12 @@ class SystemFacade
      *
      * @return callable|null
      */
-    public function setExceptionHandler(callable $handler)
+    public function setExceptionHandler($handler)
     {
+        if (!is_callable($handler)) {
+            throw new \InvalidArgumentException('$handler must be a callable.');
+        }
+
         return set_exception_handler($handler);
     }
 
@@ -64,8 +72,12 @@ class SystemFacade
      *
      * @return void
      */
-    public function registerShutdownFunction(callable $function)
+    public function registerShutdownFunction($function)
     {
+        if (!is_callable($function)) {
+            throw new \InvalidArgumentException('$function must be a callable.');
+        }
+
         register_shutdown_function($function);
     }
 
@@ -118,13 +130,25 @@ class SystemFacade
     }
 
     /**
+     * For php5.3 version, @see https://stackoverflow.com/a/12112589
+     *
      * @param int $httpCode
      *
      * @return int
      */
     public function setHttpResponseCode($httpCode)
     {
-        return http_response_code($httpCode);
+        static $theHeader = null;
+
+        if($theHeader) {
+            return $theHeader;
+        }
+
+        $theHeader = $httpCode;
+
+        header('HTTP/1.1 '.$httpCode);
+
+        return $httpCode;
     }
 
     /**
