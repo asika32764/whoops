@@ -1,7 +1,7 @@
 {
-    "name": "filp/whoops",
+    "name": "asika/whoops",
     "license": "MIT",
-    "description": "php error handling for cool kids",
+    "description": "php error handling for cool kids, supports PHP8 before official release.",
     "keywords": ["library", "error", "handling", "exception", "whoops", "throwable"],
     "homepage": "https://filp.github.io/whoops/",
     "authors": [
